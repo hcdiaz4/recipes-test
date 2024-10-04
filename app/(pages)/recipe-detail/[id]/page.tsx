@@ -15,9 +15,12 @@ export default function RecipeDetailPage({ params }: { params: { id: number } })
     }, []);
 
     const getRecipeById = async () => {
-        const recipe = await getRecipeDetail(params.id);
-        console.log('Recipe: ', recipe);
-        setRecipe(recipe);
+        try {
+            const recipe = await getRecipeDetail(params.id);
+            setRecipe(recipe);
+        } catch (error) {
+            console.log('(getRecipeById): Fetch error: ', error);
+        }
     }
     return (
         <section>
@@ -46,6 +49,10 @@ export default function RecipeDetailPage({ params }: { params: { id: number } })
                         <ul className="list-decimal list-inside mt-4">
                             {recipe?.instructions.map(item => (<li key={item}>{item}</li>))}
                         </ul>
+                    </div>
+
+                    <div className="mt-5 text-2xl">
+                        Rating: {recipe?.rating}
                     </div>
                 </div>
             </div>
