@@ -21,7 +21,6 @@ const useRecipe = (): UseRecipeData => {
             try {
                 setLoading(true);
                 const recipesData = await getAllRecipes();
-                console.log('Hook recipes: ', recipesData);
                 setData(recipesData.recipes);
                 setLoading(false);
 
